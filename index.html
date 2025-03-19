@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TechLabs Whisper</title>
+  <script src="popup.js"></script>
+  <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body>
+  <div class="header"><img src="./icon128.png"/> <h1>TechLabs Whisper</h1></div>
+
+  <div class="checkbox-container">
+    <input type="checkbox" id="useVadCheckbox">
+    <label for="useVadCheckbox">Use Voice Activity Detection</label>
+  </div>
+  
+  <textarea id="waitTextBox" style="display: none;"></textarea>
+  <div class="dropdown-container">
+    <label for="languageDropdown">Select Language:</label>
+    <select id="languageDropdown">
+      <option value="sv" selected>Swedish</option>
+      <option value="fi">Finnish</option>
+      <option value="en">English</option>  
+    </select>
+  </div>
+
+  <div class="dropdown-container">
+    <label for="taskDropdown">Select task:</label>
+    <select id="taskDropdown">
+      <option value="transcribe" selected>Transcribe</option>
+      <option value="translate">Translate (to english)</option>
+    </select>
+  </div>
+
+  <div class="dropdown-container">
+    <label for="modelSizeDropdown">Select Model Size:</label>
+    <select id="modelSizeDropdown">
+      <option value="">Select model</option>
+      <option value="tiny">Tiny </option>
+      <option value="base">Base</option>
+      <option value="small" selected>Small</option>
+      <option value="medium">Medium</option>
+      <option value="large-v2">Large-v2</option>
+      <option value="large-v3">Large-v3</option>
+    </select>
+  </div>
+
+  <div class="button-container">
+    <div class="button" id="startCapture">Start Capture</div>
+    <div class="button" id="stopCapture" disabled>Stop Capture</div>
+  </div>
+
+  <div id="transcription">Transcription will appear here...</div>
+</body>
+</html>

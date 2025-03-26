@@ -1,49 +1,14 @@
 // Configure host and port here (edge device running whisper-live)
-let host = "1.1.1.1";
-let port = "1234";
+const host = "1.2.3.4";
+const port = "1234";
+let selectedLanguage = "sv";
+let selectedTask = "transcribe";
+let selectedModelSize = "large-v3";
 
 document.addEventListener("DOMContentLoaded", function () {
   const startButton = document.getElementById("startCapture");
   const stopButton = document.getElementById("stopCapture");
-
-  const useVadCheckbox = document.getElementById("useVadCheckbox");
-  const languageDropdown = document.getElementById('languageDropdown');
-  const taskDropdown = document.getElementById('taskDropdown');
-  const modelSizeDropdown = document.getElementById('modelSizeDropdown');
-  let selectedLanguage = null;
-  let selectedTask = taskDropdown.value;
-  let selectedModelSize = modelSizeDropdown.value;
-
-
-
-
-
-
-  useVadCheckbox.addEventListener("change", () => {
-    const useVadState = useVadCheckbox.checked;
-    console.log("Changed VAD state to" + useVadState);
-  });
-
-  languageDropdown.addEventListener('change', function () {
-    if (languageDropdown.value === "") {
-      selectedLanguage = null;
-    } else {
-      selectedLanguage = languageDropdown.value;
-    }
-    console.log("Changed language to " + selectedLanguage);
-  });
-
-  taskDropdown.addEventListener('change', function () {
-    selectedTask = taskDropdown.value;
-    console.log("Changed task to " + selectedTask);
-  });
-
-  modelSizeDropdown.addEventListener('change', function () {
-    selectedModelSize = modelSizeDropdown.value;
-    console.log("Changed model to " + selectedModelSize);
-  });
-
-
+  const headerBox = document.getElementsByClassName('header')[0];
 
 
   /* ##################### */
@@ -124,8 +89,7 @@ document.addEventListener("DOMContentLoaded", function () {
           uid: uuid,
           language: data.language,
           task: data.task,
-          model: data.modelSize,
-          use_vad: data.useVad
+          model: data.modelSize
         })
       );
     };
@@ -188,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    document.body.appendChild(elem_container);
+    headerBox.insertAdjacentElement('afterend', elem_container);
   }
 
   function getStyle(el, styleProp) {
@@ -245,13 +209,14 @@ document.addEventListener("DOMContentLoaded", function () {
         port: port,
         language: selectedLanguage,
         task: selectedTask,
-        modelSize: selectedModelSize,
-        useVad: useVadCheckbox.checked,
+        modelSize: selectedModelSize
       }
     }
     isCapturing = true;
     startRecording(request.data);
-
+    // Toggle start stop button
+    startButton.style.display = "none";
+    stopButton.style.display = "block";
   });
 
   stopButton.addEventListener("click", function () {
@@ -269,6 +234,8 @@ document.addEventListener("DOMContentLoaded", function () {
       mediaStream = null;
       recorder = null;
     }
+    stopButton.style.display = "none";
+    startButton.style.display = "block";
   });
 
 

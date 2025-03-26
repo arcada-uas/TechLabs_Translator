@@ -61,9 +61,11 @@ label {
 
 .button-container {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 10px;
   width: 96%;
+  position: fixed;
+  bottom: 10px;
 }
 
 .button {
@@ -76,6 +78,10 @@ label {
   width: 150px;
   text-align: center;
   margin: 10px 0px;
+}
+
+#stopCapture {
+  display: none;
 }
 
 .disabled {

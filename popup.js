@@ -105,6 +105,9 @@ document.addEventListener("DOMContentLoaded", function () {
         isServerReady = true;
         console.log("SERVER READY!");
         document.querySelector(".patient:nth-last-of-type(2)").firstChild.textContent = "Lyssnar..."
+        stopButton.style.backgroundColor = "red";
+        stopButton.style.color = "white";
+        stopButton.textContent = "Lyssnar...";
         return;
       }
       if (language === null) {
@@ -238,14 +241,17 @@ document.addEventListener("DOMContentLoaded", function () {
     };
     isCapturing = true;
     startRecording(request.data);
-    // Toggle start stop button
+    // Style stopbutton initializing
+    stopButton.style.backgroundColor = "black";
+    stopButton.style.color = "white";
+    stopButton.textContent = "Initierar...";
+    // Swap startbutton to stopbutton
     startButton.style.display = "none";
     stopButton.style.display = "block";
   });
 
   stopButton.addEventListener("click", function () {
     console.log("User tried to STOP transcription");
-    stopButton.toggleAttribute("disabled");
     isCapturing = false;
     if (socket) {
       socket.close();
@@ -258,6 +264,7 @@ document.addEventListener("DOMContentLoaded", function () {
       mediaStream = null;
       recorder = null;
     }
+    // Swap startbutton to stopbutton
     stopButton.style.display = "none";
     startButton.style.display = "block";
     speechBubble++;

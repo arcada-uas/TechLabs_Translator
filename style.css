@@ -88,7 +88,7 @@ label {
 
 .button {
     padding: 10px;
-    border: 2px solid grey;
+    border: 4px solid grey;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
@@ -98,8 +98,20 @@ label {
     margin: 10px 0px;
 }
 
+/* Record button animation */
+@keyframes listening {
+    from {border: 4px solid grey;}
+    to {border: 4px solid black;}
+  }
+
 #stopCapture {
     display: none;
+    background-color: red;
+    color: white;
+    animation-name: listening;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 .disabled {
